@@ -23,7 +23,7 @@ function fetchAndDisplayGif(event) {
     var answer = $('#answer').val();
 
     if (answer != 5) {
-        $('#validateError').html("<p style='color: red;'>No GIFs for you!</p>");
+        $("#validateError").html("<p style='color: red;'>No GIFs for you!</p>");
         $("#gif").hide();
     } else {
         $("#validateError").text("");
