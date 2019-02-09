@@ -24,7 +24,7 @@ function fetchAndDisplayGif(event) {
 
     if (answer != 5) {
         $("#validateError").html("<p style='color: red;'>No GIFs for you!</p>");
-        $("#gif").hide();
+        setGifLoadedStatus(false);
     } else {
         $("#validateError").text("");
         setGifLoadedStatus(true);
