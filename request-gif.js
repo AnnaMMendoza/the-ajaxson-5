@@ -1,4 +1,5 @@
-
+// AJAXson 5 - 2nd Assignment - LC101
+// Anna Mendoza
 
 $(document).ready(function() {
     // register our function as the "callback" to be triggered by the form's submission event
@@ -19,7 +20,15 @@ function fetchAndDisplayGif(event) {
     event.preventDefault();
     
     // Add the validation here before the Query runs
+    var answer = $('#answer').val();
 
+    if (answer != 5) {
+        $('#validateError').html("<p style='color: red;'>No GIFs for you!</p>");
+        $("#gif").hide();
+    } else {
+        $("#validateError").text("");
+        setGifLoadedStatus(true);
+    }
     
     // get the user's input text from the DOM
     var searchQuery = $("#tag").val(); // TODO should be e.g. "dance"
@@ -49,9 +58,9 @@ function fetchAndDisplayGif(event) {
             // 1. set the source attribute of our image to the image_url of the GIF
             // var gif = response.data.image_url;
             console.log(gif);
-            // 2. hide the feedback message and display the image - not displaying
+            // 2. hide the feedback message and display the image
             $("#gif").attr("src", response.data.image_url);
-            // $('#error').attr('hidden', false);
+            $('#error').attr('hidden', false);
             setGifLoadedStatus(true);
         },
         error: function() {
@@ -68,7 +77,6 @@ function fetchAndDisplayGif(event) {
     $("#feedback").attr("hidden", false);
     $("#feedback").text("Loading...");
 }
-
 
 /**
  * toggles the visibility of UI elements based on whether a GIF is currently loaded.
