@@ -22,14 +22,7 @@ function fetchAndDisplayGif(event) {
     // Add the validation here before the Query runs
     var answer = $('#answer').val();
 
-    if (answer != 5) {
-        $("#validateError").html("<p style='color: red;'>No GIFs for you!</p>");
-        setGifLoadedStatus(false);
-    } else {
-        $("#validateError").text("");
-        setGifLoadedStatus(true);
-    }
-    
+   
     // get the user's input text from the DOM
     var searchQuery = $("#tag").val(); // TODO should be e.g. "dance"
     console.log(searchQuery);
@@ -49,19 +42,29 @@ function fetchAndDisplayGif(event) {
         }, // attach those extra parameters onto the request
         success: function(response) {
             // if the response comes back successfully, the code in here will execute.
-            
+
             // jQuery passes us the `response` variable, a regular javascript object created from the JSON the server gave us
             console.log("we received a response!");
             console.log(response);
-            
+
+
             // TODO
             // 1. set the source attribute of our image to the image_url of the GIF
             // var gif = response.data.image_url;
             console.log(gif);
             // 2. hide the feedback message and display the image
-            $("#gif").attr("src", response.data.image_url);
-            $('#error').attr('hidden', false);
-            setGifLoadedStatus(true);
+            if (answer != 5) {
+                $("#validateError").html("<p style='color: red;'>No GIFs for you!</p>");
+                $("#feedback").text("");
+                setGifLoadedStatus(false);
+            } else {
+                $("#validateError").text("");
+                $("#gif").attr("src", response.data.image_url);
+                $('#error').attr('hidden', false);
+                setGifLoadedStatus(true);
+            }
+
+            // setGifLoadedStatus(true);
         },
         error: function() {
             // if something went wrong, the code in here will execute instead of the success function
